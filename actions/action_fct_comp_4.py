@@ -13,17 +13,26 @@ class AppFctComp4(QDialog):
         super(QDialog, self).__init__()
         self.ui = uic.loadUi("gui/fct_comp_4.ui", self)
         self.data = data
-        self.refreshCatList()
+
+        self.ui.comboBox.addItem('')
+
+        cursor = self.data.cursor()
+        result = cursor.execute("SELECT DISTINCT noDos FROM LesTickets")
+        for i in result:
+            self.ui.comboBox.addItem(str(i[0]))
+
+        self.ui.comboBox.activated[str].connect(self.refreshCatList)
 
     # Fonction de mise à jour de l'affichage
     def refreshResult(self):
-        # TODO 1.7 : fonction à modifier pour que le numéro de dossier ne puisse être choisi que parmi ceux présents dans la base et que la catégorie ne propose que des valeurs possibles pour le dossier choisi, une fois le fichier ui correspondant mis à jour
+        # TODO 1.7 : fonction à modifier pour que le numéro de dossier ne puisse être choisi que parmi ceux présents dans la base
+        #  et que la catégorie ne propose que des valeurs possibles pour le dossier choisi, une fois le fichier ui correspondant mis à jour
         display.refreshLabel(self.ui.label_fct_comp_4, "")
         try:
             cursor = self.data.cursor()
             result = cursor.execute(
                 "SELECT * FROM LesTickets NATURAL JOIN LesPlaces NATURAL JOIN LesZones WHERE noDos = ? AND catZone=?",
-                [self.ui.spinBox_fct_4_dossier.text().strip(),self.ui.comboBox_4_categorie.currentText()]
+                [self.ui.comboBox.currentText(),self.ui.comboBox_4_categorie.currentText()]
             )
         except Exception as e:
             self.ui.table_fct_comp_4.setRowCount(0)
@@ -36,10 +45,9 @@ class AppFctComp4(QDialog):
     # Fonction de mise à jour des catégories
     @pyqtSlot()
     def refreshCatList(self):
-
         try:
             cursor = self.data.cursor()
-            result = cursor.execute("SELECT catZone FROM LesZones")
+            result = cursor.execute("SELECT DISTINCT catZone FROM LesTickets NATURAL JOIN LesPlaces NATURAL JOIN LesZones WHERE noDos = ?",[self.ui.comboBox.currentText()])
         except Exception as e:
             self.ui.comboBox_4_categorie.clear()
         else:
