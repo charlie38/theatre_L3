@@ -102,6 +102,11 @@
        <string>noDos</string>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>libelleCat</string>
+      </property>
+     </column>
     </widget>
    </item>
    <item>

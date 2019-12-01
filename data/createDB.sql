@@ -15,10 +15,12 @@ create table LesTickets (
     noRang integer,
     dateEmTick date,
     noDos integer not null,
+    libelleCat text,
     constraint pk_tck_place_rep unique (noSpec, dateRep, noPlace, noRang),
     constraint fk_tck_numS_dateR foreign key (noSpec, dateRep) references LesRepresentations_base(noSpec, dateRep),
     constraint fk_tck_noP_noR foreign key (noPlace, noRang) references LesPlaces (noPlace,noRang),
     constraint fk_tck_noD foreign key (noDos) references LesDossiers_base (noDos),
+    constraint fk_tck_libCat foreign key(libelleCat) references LesTickets(libelleCat)
     constraint ck_dates check (dateEmTick < dateRep)
 );
 
@@ -60,17 +62,21 @@ CREATE VIEW LesRepresentations(noSpec, dateRep, promoRep, nbPlacesRestantes) AS
   SELECT noSpec, dateRep, promoRep, nbPtot - nbPocc
   FROM
   (
-      SELECT noSpec,
-             dateRep,
-             promoRep,
-             COUNT(noPlace) AS nbPocc,
-             (
-                 SELECT COUNT(noPlace)
-                 FROM LesPlaces
-             )
-             nbPtot
-      FROM LesTickets NATURAL JOIN LesRepresentations_base
-      GROUP BY "noSpec", "dateRep", "promoRep"
+    SELECT LesRepresentations_base.noSpec,
+         LesRepresentations_base.dateRep,
+         promoRep,
+         (
+            SELECT COUNT(noPlace)
+            FROM LesTickets
+            WHERE (LesTickets.noSpec = LesRepresentations_base.noSpec AND LesTickets.dateRep = LesRepresentations_base.dateRep)
+         )
+         nbPocc,
+         (
+             SELECT COUNT(noPlace)
+             FROM LesPlaces
+         )
+         nbPtot
+    FROM LesRepresentations_base
   )
 ;
 -- TODO 1.3 : ajouter la table LesCategoriesTickets
@@ -85,13 +91,14 @@ CREATE TABLE LesCategoriesTickets (
 -- TODO 1.4 : ajouter la définition de la vue LesDossiers
 
 CREATE VIEW LesDossiers(noDos,montant) AS
-SELECT noDos, SUM(prixBaseSpec*promoRep*tauxReductionCat)
+SELECT noDos, SUM(prixBaseSpec*promoRep*tauxZone*tauxReductionCat)
 FROM (
-  SELECT noDos, noSpec, dateRep, prixBaseSpec, promoRep, tauxReductionCat FROM LesDossiers_base
+  SELECT noDos, noSpec, dateRep, prixBaseSpec, promoRep, tauxZone, tauxReductionCat FROM LesTickets
   NATURAL JOIN LesSpectacles
-  NATURAL JOIN LesTickets
-  NATURAL JOIN LesCategoriesTickets
   NATURAL JOIN LesRepresentations_base
+  NATURAL JOIN LesPlaces
+  NATURAL JOIN LesZones
+  NATURAL JOIN LesCategoriesTickets
 )
 GROUP BY noDos
 ;

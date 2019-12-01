@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>747</width>
+    <width>808</width>
     <height>863</height>
    </rect>
   </property>
@@ -718,8 +718,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>747</width>
-     <height>27</height>
+     <width>808</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFiles">
@@ -931,6 +931,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_11</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>open_fct_int_2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>373</x>
+     <y>614</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>431</y>
+    </hint>
+   </hints>
+  </connection>
+    <connection>
+   <sender>pushButton_13</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>open_fct_mod_1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>373</x>
+     <y>614</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>431</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>createDB()</slot>
@@ -940,11 +972,13 @@
   <slot>openAddUser()</slot>
   <slot>openDelUser()</slot>
   <slot>open_fct_int_1()</slot>
+  <slot>open_fct_int_2()</slot>
   <slot>open_fct_fournie_1()</slot>
   <slot>open_fct_fournie_2()</slot>
   <slot>open_fct_comp_1()</slot>
   <slot>open_fct_comp_2()</slot>
   <slot>open_fct_comp_3()</slot>
   <slot>open_fct_comp_4()</slot>
+  <slot>open_fct_mod_1()</slot>
  </slots>
 </ui>
