@@ -17,6 +17,7 @@ from actions.action_fct_int_1 import AppFctInt1
 from actions.action_fct_int_2 import AppFctInt2
 
 from actions.action_fct_mod_1 import AppFctMod1
+from actions.action_fct_mod_2 import AppFctMod2
 
 # Classe utilisée pour lancer la fenêtre principale de l'application et définir ses actions
 class AppWindow(QMainWindow):
@@ -32,6 +33,7 @@ class AppWindow(QMainWindow):
     # TODO 3 : ajouter les fenetres (rep. gui) et les actions (rep. actions) correspondant aux 2 items de la partie 3.
 
     fct_mod_1_dialog = None
+    fct_mod_2_dialog = None
 
     # On prévoit des variables pour accueillir les fenêtres supplémentaires
     tablesDataDialog = None
@@ -140,6 +142,13 @@ class AppWindow(QMainWindow):
         self.fct_mod_1_dialog.show()
         self.changedValue.connect(self.fct_mod_1_dialog.refreshIns)
 
+    def open_fct_mod_2(self):
+        if self.fct_mod_2_dialog is not None:
+            self.fct_mod_2_dialog.close()
+        self.fct_mod_2_dialog = AppFctMod2(self.data)
+        self.fct_mod_2_dialog.show()
+        self.changedValue.connect(self.fct_mod_2_dialog.refreshDossier)
+
     # En cas de clic sur le bouton de visualisation des données
     def openData(self):
         if self.tablesDataDialog is not None:
@@ -225,6 +234,8 @@ class AppWindow(QMainWindow):
             self.fct_int_2_dialog.close()
         if (self.fct_mod_1_dialog is not None):
             self.fct_mod_1_dialog.close()
+        if (self.fct_mod_2_dialog is not None):
+            self.fct_mod_2_dialog.close()
 
         # On ferme proprement la base de données
         self.data.close()

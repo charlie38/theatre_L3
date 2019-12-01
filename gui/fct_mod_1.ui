@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>tablesData</class>
- <widget class="QDialog" name="tablesData">
+ <class>fct_mod_1</class>
+ <widget class="QDialog" name="fct_mod_1">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -225,7 +225,7 @@
   <connection>
    <sender>pushButton</sender>
    <signal>clicked()</signal>
-   <receiver>tablesData</receiver>
+   <receiver>fct_mod_1</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -241,7 +241,7 @@
   <connection>
    <sender>pushButton_2</sender>
    <signal>clicked()</signal>
-   <receiver>tablesData</receiver>
+   <receiver>fct_mod_1</receiver>
    <slot>refreshIns()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -256,9 +256,6 @@
   </connection>
  </connections>
  <slots>
-  <slot>refreshSpectaclesData()</slot>
-  <slot>refreshZonesData()</slot>
-  <slot>refreshRepresentationsData()</slot>
   <slot>refreshIns()</slot>
  </slots>
 </ui>

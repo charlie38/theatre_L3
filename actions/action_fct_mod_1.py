@@ -27,8 +27,15 @@ class AppFctMod1(QDialog):
         display.refreshLabel(self.ui.label_3, "")
         try:
             cursor = self.data.cursor()
-            cursor.execute("INSERT INTO LesRepresentations_base(noSpec,dateRep,promoRep) VALUES (?,?,?)", [self.ui.comboBox.currentText(), self.ui.doubleSpinBox.value(), self.ui.dateTimeEdit.dateTime().toString('DD/MM/YYYY HH:MM')])
+            cursor.execute("SELECT noSpec FROM LesSpectacles WHERE nomSpec = ?", [self.ui.comboBox.currentText()])
+            numSpec = cursor.fetchone()
+            cursor.execute("INSERT INTO LesRepresentations_base(noSpec,dateRep,promoRep) VALUES (?,?,?)", [numSpec[0], self.ui.dateTimeEdit.dateTime().toString('dd/MM/yyyy hh:mm'), self.ui.doubleSpinBox.value()])
+        except TypeError:
+            display.refreshLabel(self.ui.label_3, "Échec de l'ajout : veuillez choisir un spectacle!")
+        except sqlite3.IntegrityError:
+            display.refreshLabel(self.ui.label_3, "Échec de l'ajout : cette représentation existe déjà!")
         except Exception as e:
-            display.refreshLabel(self.ui.label_3, "Impossible d'ajouter cette représentation : " + repr(e))
+                display.refreshLabel(self.ui.label_3, "Impossible d'ajouter cette représentation : " + repr(e))
         else:
-            display.refreshLabel(self.ui.label_3, "Ajout de représenation réussie!")
+            display.refreshLabel(self.ui.label_3, "Ajout de représentation réussie!")
+            self.data.commit()
