@@ -35,7 +35,7 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabInsert">
       <attribute name="title">
@@ -265,12 +265,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabUpdate">
-      <attribute name="title">
-       <string>Modifier</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_10"/>
-     </widget>
     </widget>
    </item>
    <item>
@@ -331,22 +325,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>fct_mod_1</receiver>
-   <slot>refreshIns()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>815</x>
-     <y>148</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>438</x>
-     <y>282</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButton_4</sender>
    <signal>clicked()</signal>
    <receiver>fct_mod_1</receiver>
@@ -355,6 +333,22 @@
     <hint type="sourcelabel">
      <x>718</x>
      <y>63</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>438</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>fct_mod_1</receiver>
+   <slot>refreshIns()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>815</x>
+     <y>148</y>
     </hint>
     <hint type="destinationlabel">
      <x>438</x>

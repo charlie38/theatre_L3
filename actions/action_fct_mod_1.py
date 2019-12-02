@@ -13,7 +13,7 @@ class AppFctMod1(QDialog):
         self.ui = uic.loadUi("gui/fct_mod_1.ui", self)
         self.data = data
 
-        #on initialise comboBox de l'onglet Insérer
+        # on initialise comboBox de l'onglet Insérer
         self.ui.comboBox.addItem('')
 
         cursor = self.data.cursor()
@@ -54,6 +54,7 @@ class AppFctMod1(QDialog):
 
         # on récupère le numéro du spectacle concerné
         if not self.ui.comboBox_2.currentText():
+            self.ui.tableWidget.setRowCount(0)
             display.refreshLabel(self.ui.label_5, "Veuillez sélectionner un spectacle")
         else:
             cursor = self.data.cursor()

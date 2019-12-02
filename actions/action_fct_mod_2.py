@@ -98,6 +98,7 @@ class AppFctMod2(QDialog):
         cursor.execute("SELECT noSpec FROM LesSpectacles WHERE nomSpec = ?", [ligne_courante[0]])
         numSpec = cursor.fetchone()
         ligne_courante[0] = numSpec[0]
+        # ajout noDos
         ligne_courante.append(self.ui.lineEdit.text().strip())
 
 
