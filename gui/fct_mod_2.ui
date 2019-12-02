@@ -197,6 +197,13 @@
              <height>0</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <italic>true</italic>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -449,22 +456,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>tableWidget</sender>
-   <signal>cellClicked(int,int)</signal>
-   <receiver>tableWidget</receiver>
-   <slot>selectRow(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>512</x>
-     <y>292</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>512</x>
-     <y>292</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButton_5</sender>
    <signal>clicked()</signal>
    <receiver>fct_mod_2</receiver>
@@ -480,10 +471,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tableWidget</sender>
+   <signal>cellClicked(int,int)</signal>
+   <receiver>fct_mod_2</receiver>
+   <slot>refreshModif()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>512</x>
+     <y>252</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>512</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushModif</sender>
+   <signal>clicked()</signal>
+   <receiver>fct_mod_2</receiver>
+   <slot>modifTicket()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>915</x>
+     <y>487</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>512</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>refreshDossierSupp()</slot>
   <slot>refreshDossierMod()</slot>
   <slot>SuppTicket()</slot>
+  <slot>modifTicket()</slot>
+  <slot>refreshModif()</slot>
  </slots>
 </ui>

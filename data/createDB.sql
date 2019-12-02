@@ -20,7 +20,7 @@ create table LesTickets (
     constraint fk_tck_numS_dateR foreign key (noSpec, dateRep) references LesRepresentations_base(noSpec, dateRep),
     constraint fk_tck_noP_noR foreign key (noPlace, noRang) references LesPlaces (noPlace,noRang),
     constraint fk_tck_noD foreign key (noDos) references LesDossiers_base (noDos),
-    constraint fk_tck_libCat foreign key(libelleCat) references LesTickets(libelleCat)
+    constraint fk_tck_libCat foreign key(libelleCat) references LesTickets(libelleCat) ON UPDATE CASCADE,
     constraint ck_dates check (dateEmTick < dateRep)
 );
 

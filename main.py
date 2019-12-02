@@ -92,7 +92,7 @@ class AppWindow(QMainWindow):
         else:
             # Si tout s'est bien passé, on affiche le message de succès et on commit
             display.refreshLabel(self.ui.label_2, "Un jeu de test a été inséré dans la base avec succès.")
-            self.data.commit()
+
             # On émet le signal indiquant la modification de la table
             self.changedValue.emit()
 
