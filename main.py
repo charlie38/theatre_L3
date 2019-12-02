@@ -147,7 +147,7 @@ class AppWindow(QMainWindow):
             self.fct_mod_2_dialog.close()
         self.fct_mod_2_dialog = AppFctMod2(self.data)
         self.fct_mod_2_dialog.show()
-        self.changedValue.connect(self.fct_mod_2_dialog.refreshDossier)
+        self.changedValue.connect(self.fct_mod_2_dialog.refreshDossierMod)
 
     # En cas de clic sur le bouton de visualisation des données
     def openData(self):
